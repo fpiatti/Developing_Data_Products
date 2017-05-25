@@ -1,0 +1,66 @@
+Developing Data Products: Shiny Application & Reproducible Pitch
+========================================================
+author: E. Piatti
+date: 5/25/17
+autosize: false
+
+
+Combined Cycle Power Plant
+========================================================
+The efficiency of a single cycle power plant is around 35-45%. In order to increase this efficiency, and hence reduce costs, it is possible to combine more than one heat engine in what is called a "combined cycle".
+The typical design of a combined cycle power plant consists of a gas turbine coupled to a generator and whose exhaust gases are used to generate steam. This steam is used to turn a steam turbine coupled to another generator. Combined cycle power plants offer efficiencies of 50-54%. 
+
+========================================================
+
+![](COGES_diagram.png)
+
+***
+
+1. Generators
+2. Steam Turbine
+3. Condenser
+4. Pump
+5. Heat Exchanger
+6. Gas Turbine
+
+
+Power Output Prediction
+========================================================
+
+A dataset with more than 9500 datapoints was collected over a period of six years for the including environment conditions and power output of a combined cycle power plant operating at full load. The variables in the dataset are the following:
+
+1. Ambient Temperature (AT)
+2. Ambient Pressure (AP)
+3. Relative Humidity (RH)
+4. Exhaust Vacuum (V)
+5. Power Output (PE)
+
+Power Output Prediction - Modeling
+========================================================
+
+Some basic exploratory analysis allows us to examine the relation between the variables.
+
+```{r, echo=FALSE, fig.show='asis', fig.align='center'}
+library(GGally)
+
+# load data
+df <- read.csv('data.csv', header = TRUE, sep = ',')
+ggpairs(df)
+```
+
+Power Output Prediction App
+========================================================
+
+A *random forest* model was fit to the data in order to predict *power output* based on environment conditions and exhaust vacuum.
+This simple [web app](https://fpiatti.shinyapps.io/DDPR/) allows to predict the power output by specifying environment parameters and exahust vacuum. Users should select the desired conditions with the sliders on the left of the screen and observe the predicted power output.
+
+![](WebApp.png)
+
+
+Bibliography and Dataset Information
+========================================================
+1. Pinar Tufekci, Prediction of full load electrical power output of a base load operated combined cycle power plant using machine learning methods, International Journal of Electrical Power & Energy Systems, Volume 60, September 2014, Pages 126-140, ISSN 0142-0615. [(Web link)](http://www.sciencedirect.com/science/article/pii/S0142061514000908)
+
+2. Heysem Kaya, Pinar Tufekci , Sadik Fikret Gurgen: Local and Global Learning Methods for Predicting Power of a Combined Gas & Steam Turbine, Proceedings of the International Conference on Emerging Trends in Computer and Electronics Engineering ICETCEE 2012, pp. 13-18 (Mar. 2012, Dubai)
+
+Dataset available [here](https://archive.ics.uci.edu/ml/machine-learning-databases/00294/)
